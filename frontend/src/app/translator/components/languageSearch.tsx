@@ -6,8 +6,11 @@ interface Language {
     name: string;
     nativeName: string;
 }
-
-const LanguageSearchSelect: React.FC = () => {
+interface languageSearchComponentProps {
+    lang: string;
+    setLang: (newMessage: string) => void;
+}
+const LanguageSearchSelect: React.FC<languageSearchComponentProps> = ({ lang, setLang }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredLanguages, setFilteredLanguages] = useState<Language[]>([]);
     const [selectedLanguage, setSelectedLanguage] = useState<Language | null>(null);
@@ -26,6 +29,7 @@ const LanguageSearchSelect: React.FC = () => {
 
     const handleSelect = (language: Language) => {
         setSelectedLanguage(language);
+        setLang(language.code);
         setSearchTerm('');
         setFilteredLanguages([]);
     };
